@@ -115,6 +115,7 @@ BEGIN
             IF @status & 16 <> 0
                 set @msg += '[err16] column data row order not matched'  + char(10)
             PRINT (@msg);
+            PRINT '';
 
             -- skip and go to next pair
             -- FETCH NEXT FROM @Cursor

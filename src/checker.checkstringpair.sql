@@ -39,6 +39,7 @@ BEGIN
     -- no select statement is query
     if @EXP_isSelect=0
     BEGIN
+        PRINT '[ERR1]'
         PRINT concat_ws(' ', 'No "SELECT" statement in query:', @EXP_QueryString)
         return 1
     END
@@ -86,7 +87,8 @@ BEGIN
     -- no select statement is query
     if @ACT_isSelect=0
         BEGIN
-        -- PRINT concat_ws(' ', 'No "SELECT" statement in query:')
+        PRINT '[ERR1]'
+        PRINT concat_ws(' ', 'No "SELECT" statement in query:', @ACT_QueryString)
         return 1
         END
 
@@ -124,7 +126,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         -- the two sets of column datatypes NOT SAME
-        -- PRINT concat_ws(' ', '!EXPECTED COLUMN DATATYPE(S) NOT MATCHED:')
+        PRINT '[ERR2]'
+        PRINT concat_ws(' ', 'Expected column datatype(s):', @EXP_column_set)
+        PRINT concat_ws(' ', 'Actual column datatype(s):', @ACT_column_set)
         return 2
     END CATCH
 
@@ -140,7 +144,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         -- the two sets of column datatypes NOT SAME
-        -- PRINT concat_ws(' ', '!EXPECTED COLUMN ORDER NOT MATCHED')
+        PRINT '[ERR4]'
+        PRINT concat_ws(' ', 'Expected order of column datatype(s):', @EXP_col_order)
+        PRINT concat_ws(' ', 'Actual order of column datatype(s):', @ACT_col_order)
         SET @status_code += 4
     END CATCH
 
@@ -155,7 +161,9 @@ BEGIN
         END TRY
         BEGIN CATCH
             -- the two sets of column datatypes NOT SAME
-            -- PRINT concat_ws(' ', '!EXPECTED COLUMN NAME(S) NOT MATCHED')
+            PRINT '[ERR8]'
+            PRINT concat_ws(' ', 'Expected column name(s):', @EXP_column_name_set)
+            PRINT concat_ws(' ', 'Actual column name(s):', @ACT_column_name_set)
             SET @status_code += 8
         END CATCH        
     END
