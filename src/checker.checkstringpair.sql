@@ -13,7 +13,7 @@ CREATE PROCEDURE Checker.CheckStringPair
     @ACT_QueryString NVARCHAR(max),
     @ExplicitColumnOrder TINYINT = 1,
     @ExplicitColumnName TINYINT = 1,
-    @ExplicitRowOrder TINYINT = 1
+    @CompareData TINYINT = 1
 AS
 BEGIN
     DECLARE @status_code INT = 0;
@@ -154,6 +154,9 @@ BEGIN
     IF @ExplicitColumnName=1
     BEGIN
         DECLARE @EXP_column_name_set NVARCHAR(max), @ACT_column_name_set NVARCHAR(max);
+        select * from #__EXP_ResultMeta;
+        select * from #__ACT_ResultMeta;
+
         select @EXP_column_name_set=string_agg(name, '|') within group (order by name) from #__EXP_ResultMeta;
         select @ACT_column_name_set=string_agg(name, '|') within group (order by name) from #__ACT_ResultMeta;
         BEGIN TRY
@@ -168,8 +171,8 @@ BEGIN
         END CATCH        
     END
 
-    -- @ExplicitRowOrder TINYINT = 1
-    IF @ExplicitRowOrder=1
+    -- @CompareData TINYINT = 1
+    IF @CompareData=1
     BEGIN
     DECLARE @EXP_column_name_alias NVARCHAR(max), @ACT_column_name_alias NVARCHAR(max);
     -- re-order column names by data types and give column aliases such as "1", "2", "3"...
@@ -212,8 +215,9 @@ BEGIN
             EXEC tSQLt.AssertEqualsTable ##Expected_datarows, ##Actual_datarows;
     END TRY
     BEGIN CATCH
-        -- the two sets of column datatypes NOT SAME
-        -- PRINT concat_ws(' ', '!EXPECTED DATA ORDER NOT MATCHED')
+        PRINT '[ERR16]'
+        PRINT 'Data row(s) not matched!'
+
         SET @status_code += 16
     END CATCH 
     END
