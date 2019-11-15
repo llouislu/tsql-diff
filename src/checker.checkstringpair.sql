@@ -31,16 +31,16 @@ BEGIN
     EXEC Checker.Private_FetchResultMetaData @EXP_QueryString;
     INSERT INTO #__EXP_ResultMeta
     SELECT name, system_type_name as dtype FROM ##ResultStructure;
-    DECLARE @EXP_isSelect INT;
-    select @EXP_isSelect=count(*)
+    DECLARE @EXP_RUN_SUCCESS INT;
+    select @EXP_RUN_SUCCESS=count(*)
     from #__EXP_ResultMeta
     -- print 'sssssss';
     -- select * from #__EXP_ResultMeta;
     -- no select statement is query
-    if @EXP_isSelect=0
+    if @EXP_RUN_SUCCESS=0
     BEGIN
         PRINT '[ERR1]'
-        PRINT concat_ws(' ', 'No "SELECT" statement in query:', @EXP_QueryString)
+        PRINT concat_ws(' ', 'Query failed to run:', @EXP_QueryString)
         return 1
     END
 
@@ -81,14 +81,14 @@ BEGIN
     -- debug: result structure
     -- select * from #__ACT_ResultMeta
 
-    DECLARE @ACT_isSelect INT;
-    select @ACT_isSelect=count(*)
+    DECLARE @ACT_RUN_SUCCESS INT;
+    select @ACT_RUN_SUCCESS=count(*)
     from #__ACT_ResultMeta
     -- no select statement is query
-    if @ACT_isSelect=0
+    if @ACT_RUN_SUCCESS=0
         BEGIN
         PRINT '[ERR1]'
-        PRINT concat_ws(' ', 'No "SELECT" statement in query:', @ACT_QueryString)
+        PRINT concat_ws(' ', 'Query failed to run:', @ACT_QueryString)
         return 1
         END
 

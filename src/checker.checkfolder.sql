@@ -18,7 +18,7 @@ if @OS='Windows'
 ELSE
     set @PATHDELIMITER = N'/';
 
-print CONCAT_WS(' ', 'T-SQL SELECT Checker running on', @OS, 'with');
+print CONCAT_WS(' ', 'T-SQL Query Diff running on', @OS, 'with');
 declare @version NVARCHAR(max), @clrversion NVARCHAR(max), @sqlversion NVARCHAR(max), @Sqlbuild NVARCHAR(max), @sqledition NVARCHAR(max);
 select @version=Version, @clrversion=ClrVersion, @sqlversion=SqlVersion, @Sqlbuild=SqlBuild, @sqledition=SqlEdition from tSQLt.Info();
 print concat_ws(' ', 'tSQLt version:', @version, 'ClrVersion:', @clrversion, 'SqlVersion:', @sqlversion, 'SqlBuild:', @Sqlbuild, 'SqlEdition:', @sqledition)
@@ -50,6 +50,7 @@ BEGIN
 
     WHILE @@FETCH_STATUS = 0
     BEGIN
+        PRINT '============================'
         -- read file here
         -- get basename
         DECLARE @FileBaseName NVARCHAR(260)
@@ -105,7 +106,7 @@ BEGIN
         BEGIN
             DECLARE @msg NVARCHAR(max) = '';
             IF @status & 1 <> 0
-                PRINT 'No "SELECT" statement in query'
+                PRINT 'RUNTIME ERROR OR NO VALID SELECT STATEMENT'
             IF @status & 2 <> 0
                 PRINT 'EXPECTED COLUMN DATATYPE(S) NOT MATCHED'
             IF @status & 4 <> 0
@@ -113,7 +114,7 @@ BEGIN
             IF @status & 8 <> 0
                 set @msg += '[err8] column names not matched' + char(10)
             IF @status & 16 <> 0
-                set @msg += '[err16] column data row order not matched'  + char(10)
+                set @msg += '[err16] data row not matched'  + char(10)
             PRINT (@msg);
             PRINT '';
 

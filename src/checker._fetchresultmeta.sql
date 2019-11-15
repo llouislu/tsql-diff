@@ -88,8 +88,13 @@ BEGIN
 ,
                 tds_collation_sort_id tinyint NULL
         );
+        BEGIN TRY
         INSERT INTO ##ResultStructure
-        EXEC sp_describe_first_result_set @QueryString;
+        EXEC sp_describe_first_result_set @QueryString; 
+        END TRY  
+        BEGIN CATCH  
+        END CATCH; 
+
 
         -- anonymous column(name = NULL), name them
         UPDATE ##ResultStructure
