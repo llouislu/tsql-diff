@@ -45,13 +45,14 @@ def add_filename(fo, filename, mark='start'):
 def build_files(output_file, source_files):
     Path(build_target_folder).mkdir(exist_ok=True)
     output_path = Path(build_target_folder) / Path(output_file)
-    with open(output_path, 'w') as fo:
+    with open(str(output_path), 'w') as fo:
         add_author_disclaimer(fo)
         for source_file in source_files:
-            add_filename(fo, str(source_file), mark='start')
+            source_file = str(source_file)
+            add_filename(fo, source_file, mark='start')
             with open(source_file) as source:
                 fo.write(source.read())
-            add_filename(fo, str(source_file), mark='end')
+            add_filename(fo, source_file, mark='end')
 
 def generate_build_paths(build_file_list):
     for file in build_file_list:

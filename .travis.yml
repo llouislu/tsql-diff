@@ -1,13 +1,17 @@
 language: generic
 before_install:
-  - sudo apt-get update
-  - sudo apt-get -y install python3
-script: python3 build.py
+  - sudo apt update
+  - sudo apt install python3 -y
+script:
+  python3 build.py
 deploy:
   provider: releases
-  api_key:
-    secure: Srxs8Y3fleZLQQNq9gIDL0Tv8npO2zuFnAYDl3KguZB4gC14+R22N58JUJTYgPBYL1gt696MPqu5cUV6ulzRVpQ25W6LHHEWckGAMEGR27dcqvkbf4kWIhSk40aPU74wYWs0oJqw7KGP2QJBiRWrEiWhVfJ59f45KmhclfVxfXrs7XAQJH2JLtDAl+yQopvCVrUN9QQ0GUvlYnmLK01wog/hVjw4GDXaSmHiuc4gd7uEod5rKLQAQBmeITWGEs4IS3CgABttgLOG0POBcHPHVuZO2sowJigtQGetvUnsWd3U8Ig9MTFtoBiQPb0mcZgD4XcaxpggT8yXMERPEHCV4jfG97WB/PBbMg/H8fXxBbHa1x5/ZJwL6SDL2jSU0b/VjF2AF7Z3eUOWkHvhPtyFoIx0WQoGUFmn/luo5insLwtgeauyhkK4m04K7FFXnw9I/HbBmqYKMTeqfUWOFeKI4ZAXJlaNsuo1Hd9wwwlpvxOex1/+ZLP7J+P3GMmn2hCuqMO0n8jJn3+Wwygjii4hHA7efu4XdasrMU8QWctk9zZXr3WqCe1/FldcC/qtrhNgvGOsw23S2aTh5cCV9VtPn0GcWXk9A0RWukhdfkIAM2175QzzTVCKe/VUgK6lIesAEWknYPylm9Tellsg1UF5isv36oYUIV+Z9ROAt0QyAW0=
+  skip_cleanup: true
+  edge: true
   file: build/install.sql
   on:
     repo: llouislu/tsql-diff
     branch: master
+  tag_name: "${TRAVIS_COMMIT:0:4}"
+  draft: false
+  prerelease: false
