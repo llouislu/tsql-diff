@@ -16,6 +16,7 @@ CREATE PROCEDURE Diff.CompareString
     @CompareData TINYINT = 1
 AS
 BEGIN
+    SET NOCOUNT ON;
     DECLARE @status_code INT = 0;
 
     /*

@@ -5,6 +5,7 @@ CREATE PROCEDURE Diff.Compare
     @ActualFilePath NVARCHAR(max)
 AS
 BEGIN
+    SET NOCOUNT ON;
     -- read sql file
     -- expected
     DECLARE @expected_sqlcontent TABLE (content NVARCHAR(max));

@@ -100,7 +100,7 @@ BEGIN
         print concat_ws(' ', 'status code:', @status)
         IF @status=0
         BEGIN
-            PRINT 'PASS'
+            PRINT 'PASS' + char(10) + char(10)
         END
         IF @status<>0
         BEGIN

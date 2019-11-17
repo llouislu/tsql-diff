@@ -7,6 +7,7 @@ CREATE PROCEDURE Diff.Private_FetchResultMetaData
         @QueryString NVARCHAR(max)
 AS
 BEGIN
+        SET ANSI_WARNINGS OFF;
         IF OBJECT_ID('tempdb..##ResultStructure') IS NOT NULL DROP TABLE ##ResultStructure;
         create table ##ResultStructure
         (
