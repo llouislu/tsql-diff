@@ -1,6 +1,6 @@
-DROP PROCEDURE IF EXISTS Checker.CheckPair
+DROP PROCEDURE IF EXISTS Diff.Compare
 GO
-CREATE PROCEDURE Checker.CheckPair
+CREATE PROCEDURE Diff.Compare
     @ExpectedFilePath NVARCHAR(max),
     @ActualFilePath NVARCHAR(max)
 AS
@@ -10,7 +10,7 @@ BEGIN
     DECLARE @expected_sqlcontent TABLE (content NVARCHAR(max));
     DECLARE @expected_sqlstring NVARCHAR(max);
     insert @expected_sqlcontent
-    exec Checker.LoadSQLFile @ExpectedFilePath;
+    exec Diff.LoadSQLFile @ExpectedFilePath;
     select @expected_sqlstring=content
     from @expected_sqlcontent;
     -- print(@expected_sqlstring)
@@ -18,14 +18,14 @@ BEGIN
     DECLARE @actual_sqlcontent TABLE (content NVARCHAR(max));
     DECLARE @actual_sqlstring NVARCHAR(max);
     insert @actual_sqlcontent
-    exec Checker.LoadSQLFile @ActualFilePath;
+    exec Diff.LoadSQLFile @ActualFilePath;
     select @actual_sqlstring=content
     from @actual_sqlcontent;
     -- print(@actual_sqlstring)
 
     -- validate
     DECLARE @expected_validate_result int = -1;
-    EXEC @expected_validate_result = Checker.ValidateSQL @expected_sqlstring;
+    EXEC @expected_validate_result = Diff.ValidateSQL @expected_sqlstring;
     -- print @expected_validate_result;
     if @expected_validate_result=1
         BEGIN
@@ -35,7 +35,7 @@ BEGIN
 
 
     DECLARE @actual_validate_result int = -1;
-    EXEC @actual_validate_result = Checker.ValidateSQL @actual_sqlstring;
+    EXEC @actual_validate_result = Diff.ValidateSQL @actual_sqlstring;
     -- print @actual_validate_result;
     if @actual_validate_result=1
         BEGIN
@@ -46,7 +46,7 @@ BEGIN
     -- print '==================================='
     -- execute and assert
     DECLARE @status_code INT;
-    exec @status_code = Checker.CheckStringPair @expected_sqlstring, @actual_sqlstring;
+    exec @status_code = Diff.CompareString @expected_sqlstring, @actual_sqlstring;
     return @status_code
 END
 GO

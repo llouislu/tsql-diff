@@ -1,6 +1,6 @@
-drop PROCEDURE if EXISTS Checker.CheckStringPair
+drop PROCEDURE if EXISTS Diff.CompareString
 GO
-CREATE PROCEDURE Checker.CheckStringPair
+CREATE PROCEDURE Diff.CompareString
     -- return values
     -- 0 success
     -- 1 execution errors(file not found, syntax error, not containing SELECT)
@@ -28,7 +28,7 @@ BEGIN
         name nvarchar(256),
         dtype nvarchar(128)
     );
-    EXEC Checker.Private_FetchResultMetaData @EXP_QueryString;
+    EXEC Diff.Private_FetchResultMetaData @EXP_QueryString;
     INSERT INTO #__EXP_ResultMeta
     SELECT name, system_type_name as dtype FROM ##ResultStructure;
     DECLARE @EXP_RUN_SUCCESS INT;
@@ -73,7 +73,7 @@ BEGIN
         dtype nvarchar(128)
     );
     -- fetch metadata of the result
-    EXEC Checker.Private_FetchResultMetaData @ACT_QueryString;
+    EXEC Diff.Private_FetchResultMetaData @ACT_QueryString;
     
     INSERT INTO #__ACT_ResultMeta
     SELECT name, system_type_name as dtype

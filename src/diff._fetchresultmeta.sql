@@ -1,6 +1,6 @@
-drop PROCEDURE if EXISTS Checker.Private_FetchResultMetaData
+drop PROCEDURE if EXISTS Diff.Private_FetchResultMetaData
 GO
-CREATE PROCEDURE Checker.Private_FetchResultMetaData
+CREATE PROCEDURE Diff.Private_FetchResultMetaData
         -- show the result table structure of the first select statement in the query string
         -- returned table in table #ResultStructure
         -- if empty, means the whole query does not contain a select statement

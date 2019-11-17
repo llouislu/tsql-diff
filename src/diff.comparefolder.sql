@@ -1,6 +1,6 @@
-DROP PROCEDURE IF EXISTS Checker.CheckFolder
+DROP PROCEDURE IF EXISTS Diff.CompareFolder
 GO
-CREATE PROCEDURE Checker.CheckFolder
+CREATE PROCEDURE Diff.CompareFolder
     @FolderPath NVARCHAR(1024) = N'/root/data/t',
     @ModifierName NVARCHAR(32) = N'Model',
     @FileSuffix NVARCHAR(8) = N'.sql'
@@ -18,7 +18,7 @@ if @OS='Windows'
 ELSE
     set @PATHDELIMITER = N'/';
 
-print CONCAT_WS(' ', 'T-SQL Query Diff running on', @OS, 'with');
+print CONCAT_WS(' ', 'T-SQL Diff running on', @OS, 'with');
 declare @version NVARCHAR(max), @clrversion NVARCHAR(max), @sqlversion NVARCHAR(max), @Sqlbuild NVARCHAR(max), @sqledition NVARCHAR(max);
 select @version=Version, @clrversion=ClrVersion, @sqlversion=SqlVersion, @Sqlbuild=SqlBuild, @sqledition=SqlEdition from tSQLt.Info();
 print concat_ws(' ', 'tSQLt version:', @version, 'ClrVersion:', @clrversion, 'SqlVersion:', @sqlversion, 'SqlBuild:', @Sqlbuild, 'SqlEdition:', @sqledition)
@@ -96,7 +96,7 @@ BEGIN
        
         -- load file and execute them
         DECLARE @status int = 0;
-        exec @status = Checker.CheckPair @ExpectedSQLFilePath, @ActualSQLFilePath;
+        exec @status = Diff.Compare @ExpectedSQLFilePath, @ActualSQLFilePath;
         print concat_ws(' ', 'status code:', @status)
         IF @status=0
         BEGIN

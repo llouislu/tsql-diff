@@ -1,6 +1,6 @@
-DROP PROCEDURE IF EXISTS Checker.ValidateSQL
+DROP PROCEDURE IF EXISTS Diff.ValidateSQL
 GO
-create PROCEDURE Checker.ValidateSQL
+create PROCEDURE Diff.ValidateSQL
     @QueryString NVARCHAR(max)
 AS
 BEGIN

@@ -10,7 +10,7 @@ build_tasks = ['install']
 
 build_lists = {
     'install': [
-        '_install', '_fetchresultmeta', 'loadsqlfile', 'validatesql', 'checkstringpair', 'checkpair', 'checkfolder', 'uninstall'
+        '_install', '_fetchresultmeta', 'loadsqlfile', 'validatesql', 'comparestring', 'compare', 'comparefolder', 'uninstall'
     ]
 }
 
@@ -55,7 +55,7 @@ def build_files(output_file, source_files):
 
 def generate_build_paths(build_file_list):
     for file in build_file_list:
-        yield Path('./src/') / Path('checker.{}.sql'.format(file))
+        yield Path('./src/') / Path('diff.{}.sql'.format(file))
 
 if __name__ == '__main__':
     for task in build_tasks:

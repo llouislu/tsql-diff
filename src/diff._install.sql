@@ -7,16 +7,16 @@ BEGIN
     RETURN
 END
 
--- install Checker
-DROP SCHEMA if EXISTS Checker
+-- install Diff
+DROP SCHEMA if EXISTS Diff
 GO
-CREATE SCHEMA Checker
+CREATE SCHEMA Diff
 GO
 
 -- vendor tables
-DROP TABLE IF EXISTS Checker.ERROR;
-CREATE TABLE Checker.ERROR (id INT PRIMARY KEY IDENTITY(1,1), statusCode INT, action NVARCHAR(MAX), message NVARCHAR(MAX));
-INSERT INTO Checker.ERROR (statusCode, [action], [message]) VALUES
+DROP TABLE IF EXISTS Diff.ERROR;
+CREATE TABLE Diff.ERROR (id INT PRIMARY KEY IDENTITY(1,1), statusCode INT, action NVARCHAR(MAX), message NVARCHAR(MAX));
+INSERT INTO Diff.ERROR (statusCode, [action], [message]) VALUES
 (1, 'checkerstringpair', N'No "SELECT" statement in query'),
 (2, 'checkerstringpair', N'EXPECTED COLUMN DATATYPE(S) NOT MATCHED'),
 (4, 'checkerstringpair', N'COLUMN ORDER NOT MATCHED'),
