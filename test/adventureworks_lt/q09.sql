@@ -1,3 +1,5 @@
+-- column names not matched
+-- data rows not matched
 SELECT
     SalesLT.Customer.CompanyName,
     SalesLT.SalesOrderHeader.SubTotal,

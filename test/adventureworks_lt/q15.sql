@@ -1,3 +1,5 @@
+-- limitation of tsql diff
+-- unable to compare queries with 'WITH' statements.
 WITH
     cte1
     AS

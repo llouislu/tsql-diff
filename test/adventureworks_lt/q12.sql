@@ -1,3 +1,4 @@
+-- column types not matched
 SELECT
     SalesLT.SalesOrderHeader.SalesOrderID,
     SalesLT.SalesOrderHeader.SubTotal

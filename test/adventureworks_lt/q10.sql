@@ -1,3 +1,4 @@
+-- data rows not matched
 SELECT
     COUNT(SalesLT.SalesOrderDetail.OrderQty)
 FROM

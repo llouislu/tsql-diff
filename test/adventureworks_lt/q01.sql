@@ -1,3 +1,4 @@
+-- PASS
 SELECT
     FirstName,
     EmailAddress
