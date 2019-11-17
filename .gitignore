@@ -2,4 +2,3 @@ build/
 docker/
 docker-compose.yml
 *.bak
-.travis.yml
