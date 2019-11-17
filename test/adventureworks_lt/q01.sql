@@ -2,6 +2,6 @@ SELECT
     FirstName,
     EmailAddress
 FROM
-    Customer
+    SalesLT.Customer
 WHERE
   CompanyName = 'Bike World';
