@@ -1,0 +1,1 @@
+RESTORE DATABASE AdventureWorksLT2017 FROM DISK = "/root/data/test/db/AdventureWorksLT2017.bak" WITH MOVE "AdventureWorksLT2012_Data" TO "/var/opt/mssql/data/AdventureWorksLT2017.mdf", MOVE "AdventureWorksLT2012_Log" TO "/var/opt/mssql/data/AdventureWorksLT2012_log.ldf"

@@ -1,0 +1,1 @@
+RESTORE FILELISTONLY FROM DISK = "/root/data/test/db/AdventureWorksLT2017.bak"
