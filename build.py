@@ -6,13 +6,12 @@ from pathlib import Path
 
 build_target_folder = 'build'
 
-build_tasks = ['install', 'uninstall']
+build_tasks = ['install']
 
 build_lists = {
     'install': [
-        '_install', '_fetchresultmeta', 'loadsqlfile', 'validatesql', 'checkstringpair', 'checkpair', 'checkfolder'
-    ],
-    'uninstall': ['_uninstall']
+        '_install', '_fetchresultmeta', 'loadsqlfile', 'validatesql', 'checkstringpair', 'checkpair', 'checkfolder', 'uninstall'
+    ]
 }
 
 def add_comment(fo, comment='\n'):
