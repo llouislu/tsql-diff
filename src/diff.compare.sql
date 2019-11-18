@@ -2,7 +2,10 @@ DROP PROCEDURE IF EXISTS Diff.Compare
 GO
 CREATE PROCEDURE Diff.Compare
     @ExpectedFilePath NVARCHAR(max),
-    @ActualFilePath NVARCHAR(max)
+    @ActualFilePath NVARCHAR(max),
+    @ExplicitColumnOrder TINYINT = 1,
+    @ExplicitColumnName TINYINT = 1,
+    @CompareData TINYINT = 1
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -47,7 +50,7 @@ BEGIN
     -- print '==================================='
     -- execute and assert
     DECLARE @status_code INT;
-    exec @status_code = Diff.CompareString @expected_sqlstring, @actual_sqlstring;
+    exec @status_code = Diff.CompareString @expected_sqlstring, @actual_sqlstring, @ExplicitColumnOrder, @ExplicitColumnName, @CompareData;
     return @status_code
 END
 GO
