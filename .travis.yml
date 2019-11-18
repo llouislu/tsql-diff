@@ -1,4 +1,7 @@
 language: generic
+branches:
+  only:
+    - master
 before_install:
   - sudo apt update
   - sudo apt install python3 -y
