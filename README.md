@@ -31,7 +31,7 @@ Diff.CompareString
     @ExplicitColumnName TINYINT = 1,
     -- optional, set default value 1 to compare column name(s)
     @CompareData TINYINT = 1
-    -- optionalset default valueet 1 to reorder data rows and compare the difference
+    -- optional, set default value 1 to reorder data rows and compare the difference
 ```
 #### Output
 - An `INT`, a sum of error values
@@ -55,7 +55,7 @@ Diff.Compare
     @ExplicitColumnName TINYINT = 1,
     -- optional, set default value 1 to compare column name(s)
     @CompareData TINYINT = 1
-    -- optionalset default valueet 1 to reorder data rows and compare the difference
+    -- optional, set default valueet 1 to reorder data rows and compare the difference
 ```
 #### Output
 - An `INT`, a sum of error values
