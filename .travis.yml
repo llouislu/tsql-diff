@@ -12,6 +12,6 @@ deploy:
   on:
     repo: llouislu/tsql-diff
     branch: master
-  tag_name: "${TRAVIS_COMMIT:0:4}"
+  tag_name: "v$(date '+%Y%m%d' -u)-${TRAVIS_COMMIT:0:7}"
   draft: false
-  prerelease: false
+  prerelease: true
