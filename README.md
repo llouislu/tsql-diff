@@ -4,9 +4,19 @@ Compare Difference In T-SQL Queries at Runtime
 ![CI Status](https://travis-ci.org/llouislu/tsql-diff.svg?branch=master) ![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 
 ## Install
-1. Download [tSQLt](http://tsqlt.org/download/tsqlt/) and follow the install [guide](https://tsqlt.org/user-guide/quick-start/).
-2. Go to [release](https://github.com/llouislu/tsql-diff/releases) and download the latest **Release** version.
-3. execute install.sql in your target database.
+1. Run the following SQL in your target database
+```sql
+EXEC sp_configure 'clr enabled', 1;
+RECONFIGURE;
+EXEC sp_configure 'show advanced options', 1
+RECONFIGURE;
+EXEC sp_configure 'clr strict security', 0;
+RECONFIGURE;
+GO
+```
+2. Download [tSQLt](http://tsqlt.org/download/tsqlt/) and follow the install [guide](https://tsqlt.org/user-guide/quick-start/).
+3. Go to [release](https://github.com/llouislu/tsql-diff/releases) and download the latest **Release** version.
+4. execute install.sql in your target database.
 
 ## Uninstall
 Execute this stored procedure.
