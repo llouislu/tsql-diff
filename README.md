@@ -4,7 +4,7 @@ Compare Difference In T-SQL Queries at Runtime
 ![CI Status](https://travis-ci.org/llouislu/tsql-diff.svg?branch=master) ![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 
 ## Install
-1. Download [tSQLt](http://tsqlt.org/download/tsqlt/) and follow the install [guide](https://tsqlt.org/user-guide/quick-start/)
+1. Download [tSQLt](http://tsqlt.org/download/tsqlt/) and follow the install [guide](https://tsqlt.org/user-guide/quick-start/).
 2. Go to [release](https://github.com/llouislu/tsql-diff/releases) and download the latest **Release** version.
 3. execute install.sql in your target database.
 
@@ -99,6 +99,7 @@ exec Diff.ComapreFolder @FolderPath='/test', @ModifierName='Model'
 
 ### FAQ
 Q: Why `Diff.CompareFolder` finds nothing in a folder on Windows?
+
 A: Please grant read access of the folder to the user group `Authenticated Users`.
 
 ### Limitations
