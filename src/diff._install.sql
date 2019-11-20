@@ -3,8 +3,8 @@ declare @tsql_installed INT;
 select @tsql_installed=1 from sys.schemas where name='tSQLt'
 if @tsql_installed=0
 BEGIN
-    print 'Please install tSQLt first!!!'
-    RETURN
+    PRINT 'Please install tSQLt first!!!'
+    SET NOEXEC ON;
 END
 
 -- install Diff
