@@ -3,14 +3,14 @@ branches:
   only:
     - master
 before_install:
-  - sudo apt update
-  - sudo apt install python3 -y
+  - sudo apt-get update
+  - sudo apt-get install python3 -y
 script:
   python3 build.py
 deploy:
   provider: releases
+  api_key: $GITHUB_TOKEN
   skip_cleanup: true
-  edge: true
   file: build/install.sql
   on:
     repo: llouislu/tsql-diff
