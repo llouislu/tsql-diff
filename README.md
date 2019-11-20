@@ -4,8 +4,9 @@ Compare Difference In T-SQL Queries at Runtime
 ![CI Status](https://travis-ci.org/llouislu/tsql-diff.svg?branch=master) ![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
 
 ## Install
-1. Go to [release](https://github.com/llouislu/tsql-diff/releases) and download the latest **Release** version.
-2. execute install.sql in your target database.
+1. Download [tSQLt](http://tsqlt.org/download/tsqlt/) and follow the install [guide](https://tsqlt.org/user-guide/quick-start/)
+2. Go to [release](https://github.com/llouislu/tsql-diff/releases) and download the latest **Release** version.
+3. execute install.sql in your target database.
 
 ## Uninstall
 Execute this stored procedure.
@@ -72,7 +73,7 @@ EXEC @status_code = Diff.Compare 'path/to/query1.sql', 'path/to/query2.sql';
 Diff.CompareFolder
     @FolderPath NVARCHAR(1024) = N'/root/data/t',
     -- location of a folder where T-SQL files are stored
-    -- accepts both blackslashes on Windows and forwardslashes on *nix
+    -- accepts filepaths on Windows and Linux
     @ModifierName NVARCHAR(32) = N'Model',
     -- a filename suffix in  identifying the current file as an anchor/master/standard/expected query
     -- e.g. In the filename 'q01Model.sql', 'Model' indicates the file is marked as correct.
@@ -96,9 +97,13 @@ exec Diff.ComapreFolder @FolderPath='/test', @ModifierName='Model'
 | 8     | column names not matched                   |
 | 16    | data row not matched                       |
 
+### FAQ
+Q: Why `Diff.CompareFolder` finds nothing in a folder on Windows?
+A: Please grant read access of the folder to the user group `Authenticated Users`.
+
 ### Limitations
 
-- T-SQL Diff only receives the first `SELECT` statement as input to compare.
+- T-SQL Diff only receives the first `SELECT` statement as input to compare
 
 - `WITH` statements (e.g. cte) in `SELECT` are not supported
 
